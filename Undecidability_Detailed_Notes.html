@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undecidability Detailed Notes</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #2c3e50;
+        }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        blockquote {
+            border-left: 4px solid #ddd;
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+        }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 5px; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: #f2f2f2; }
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>📘 Detailed Notes: Undecidability in Computability Theory</h1>
+
+<hr>
+
+<h2>1. <strong>Universal Turing Machine (UTM)</strong></h2>
+
+<h3>📌 Definition:</h3>
+A <strong>Universal Turing Machine</strong> is a TM that can simulate any other TM on any input. It takes as input an encoding of a TM \( M \) and a string \( w \), and simulates the computation of \( M \) on \( w \).
+
+<p>Formally, input to UTM is: \( \langle M, w \rangle \)</p>
+
+<h3>💡 Importance:</h3>
+<ul>
+<li>Basis of modern computing (e.g., interpreters, virtual machines).</li>
+<li>Demonstrates that a single machine can perform <strong>any computation</strong> that any other machine can.</li>
+<li>Core to the concept of <strong>programmability</strong>.</li>
+</ul>
+
+<h3>🛠 How it works:</h3>
+<ul>
+<li>The transition function of the UTM is designed to read and decode the transition rules of \( M \), store them on the tape, and simulate the steps on \( w \).</li>
+</ul>
+
+<hr>
+
+<h2>2. <strong>Diagonalization Language (Ld)</strong></h2>
+
+<h3>📌 Concept:</h3>
+A theoretical construction used to show the existence of languages that <strong>cannot be recognized</strong> by any TM.
+
+<h3>📌 Definition:</h3>
+Let \( M<em>1, M</em>2, M<em>3, \ldots \) be an enumeration of all Turing Machines and \( w</em>1, w<em>2, w</em>3, \ldots \) an enumeration of all strings.
+
+<p>Define:<br>
+\[ L<em>d = \{ w</em>i \mid w<em>i \notin L(M</em>i) \} \]</p>
+
+<p>This means that \( w<em>i \) is <strong>not</strong> accepted by the i-th TM \( M</em>i \).</p>
+
+<h3>❗ Implication:</h3>
+<ul>
+<li>If \( L<em>d \) were Turing-recognizable, then we could decide the <strong>Halting Problem</strong>.</li>
+<li>Contradiction ⇒ \( L</em>d \) is <strong>not Turing-recognizable</strong>.</li>
+</ul>
+
+<h3>💡 Why it's powerful:</h3>
+<ul>
+<li>Shows the limits of computability.</li>
+<li>Some problems are unsolvable not because they are hard, but because <strong>no algorithm can exist</strong>.</li>
+</ul>
+
+<hr>
+
+<h2>3. <strong>Reduction Between Languages</strong></h2>
+
+<h3>📌 What is a Reduction?</h3>
+A way to <strong>transform</strong> one problem into another.
+
+<p>Formally, language \( A \) is <strong>reducible</strong> to language \( B \) (\( A \leq<em>m B \)) if there exists a <strong>computable function</strong> \( f \) such that:<br>
+\[ w \in A \iff f(w) \in B \]</p>
+
+<h3>💡 Use Case:</h3>
+To prove that \( A \) is undecidable, reduce a <strong>known undecidable</strong> problem (like the Halting Problem) to \( A \).
+
+<p>If such a reduction exists, then:<br>
+<ul><br>
+<li>If \( A \) were decidable, then the original undecidable problem would also be decidable — contradiction.</li><br>
+</ul></p>
+
+<h3>🧠 Key Point:</h3>
+Reductions are <strong>proof techniques</strong> to carry undecidability from one language to another.
+
+<hr>
+
+<h2>4. <strong>Rice’s Theorem</strong></h2>
+
+<h3>📌 Statement:</h3>
+All <strong>non-trivial semantic properties</strong> of the language recognized by a Turing Machine are <strong>undecidable</strong>.
+
+<p>A property is:<br>
+<ul><br>
+<li><strong>Semantic</strong>: depends only on the language the TM accepts, not its structure.</li><br>
+<li><strong>Non-trivial</strong>: the property is true for <strong>some</strong> TMs and false for <strong>others</strong>.</li><br>
+</ul></p>
+
+<h3>💡 Examples of Undecidable Properties:</h3>
+<ul>
+<li>"Does TM accept all strings?"</li>
+<li>"Does TM accept an empty language?"</li>
+<li>"Does TM accept a regular language?"</li>
+</ul>
+
+<h3>🚫 Decidable (Not semantic):</h3>
+<ul>
+<li>"Does TM have exactly 3 states?" — <strong>syntactic</strong>, thus decidable.</li>
+</ul>
+
+<h3>🔁 Intuition:</h3>
+You cannot analyze the <strong>behavior</strong> of arbitrary programs in general.
+
+<hr>
+
+<h2>5. <strong>Post Correspondence Problem (PCP)</strong></h2>
+
+<h3>📌 Definition:</h3>
+Given two lists of strings over an alphabet:
+\[ A = [a</em>1, a<em>2, ..., a</em>n] \]
+\[ B = [b<em>1, b</em>2, ..., b<em>n] \]
+
+<p>Find a sequence of indices \( i</em>1, i<em>2, ..., i</em>k \) such that:<br>
+\[ a<em>{i</em>1}a<em>{i</em>2}...a<em>{i</em>k} = b<em>{i</em>1}b<em>{i</em>2}...b<em>{i</em>k} \]</p>
+
+<h3>💡 Example:</h3>
+<pre><code>A = [ab, a]
+B = [a, ba]
+
+<p>Try i = [1, 2]:<br>
+a<em>1 a</em>2 = "ab" + "a" = "aba"<br>
+b<em>1 b</em>2 = "a" + "ba" = "aba"<br>
+✅ Match found!</code></pre></p>
+
+<h3>❗ Undecidability:</h3>
+For general cases (\( n \geq 2 \)), the problem is undecidable.
+
+<p>Used in many undecidability reductions.</p>
+
+<hr>
+
+<h2>6. <strong>Modified Post Correspondence Problem (MPCP)</strong></h2>
+
+<h3>📌 Difference:</h3>
+In MPCP, the solution <strong>must start</strong> with the <strong>first pair</strong> (\( a<em>1, b</em>1 \)).
+
+<p>This restriction is still <strong>undecidable</strong>.</p>
+
+<h3>💡 Usage:</h3>
+Often used as an <strong>intermediate step</strong> in undecidability proofs, especially in reductions.
+
+<hr>
+
+<h2>7. <strong>Translators</strong></h2>
+
+<h3>📌 Concept:</h3>
+Translators convert one formal system to another. In undecidability proofs, they are often used to simulate or transform between representations.
+
+<h3>Types of Translators:</h3>
+<ol>
+<li><strong>Grammar ↔ TM</strong>: Convert unrestricted grammars to equivalent TMs and vice versa.</li>
+<li><strong>TM → TM</strong>: Transform a TM solving one problem into a TM solving another.</li>
+<li><strong>Program to TM</strong>: Convert high-level programs into equivalent TMs.</li>
+</ol>
+
+<h3>💡 Role in Reductions:</h3>
+<ul>
+<li>Translators are used to encode problems or simulate behavior to aid in constructing reductions.</li>
+</ul>
+
+<hr>
+</body>
+</html>
